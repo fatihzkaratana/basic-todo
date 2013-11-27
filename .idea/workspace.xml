@@ -46,10 +46,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="0" selection-start="197" selection-end="197" vertical-scroll-proportion="0.18828452" vertical-offset="0" max-vertical-offset="478">
+            <state line="6" column="0" selection-start="197" selection-end="197" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="5" selection-start="72" selection-end="72" vertical-scroll-proportion="0.28242677" vertical-offset="0" max-vertical-offset="645">
               <folding />
             </state>
           </provider>
@@ -112,7 +121,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/helper/__init__.py" />
         <option value="$PROJECT_DIR$/model/__init__.py" />
         <option value="$PROJECT_DIR$/model/Todo.py" />
         <option value="$PROJECT_DIR$/helper/Utilities.py" />
@@ -128,6 +136,7 @@
         <option value="$PROJECT_DIR$/static/js/app.js" />
         <option value="$PROJECT_DIR$/templates/index.html" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -736,13 +745,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/db/users.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="34" selection-start="68" selection-end="81" vertical-scroll-proportion="0.13215859" vertical-offset="0" max-vertical-offset="454">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/lib/jquery-1.10.2.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="17134" selection-start="49269" selection-end="49269" vertical-scroll-proportion="0.12903225" vertical-offset="0" max-vertical-offset="465">
@@ -847,7 +849,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="197" selection-end="197" vertical-scroll-proportion="0.18828452" vertical-offset="0" max-vertical-offset="478">
+        <state line="6" column="0" selection-start="197" selection-end="197" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="5" selection-start="72" selection-end="72" vertical-scroll-proportion="0.28242677" vertical-offset="0" max-vertical-offset="645">
           <folding />
         </state>
       </provider>

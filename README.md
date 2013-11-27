@@ -1,5 +1,5 @@
-flask-todo
-==========
+Basic To-Do List
+================
 
 flask-todo is a simple an experimental application developed with Python Flask Micro Web Framework, Boostrap and Jquery.
 

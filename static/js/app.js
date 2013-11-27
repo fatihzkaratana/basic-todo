@@ -23,7 +23,7 @@
  * Created by fatih on 26/11/13.
  */
 
-(function($){
+(function ($) {
     /**
      * Create a Datepicker
      */
@@ -33,10 +33,10 @@
     /**
      * Bind status change event to the checkboxes
      */
-    $('input[type="checkbox"]').change(function(){
-        if ( $(this).val() == "Closed" && !$(this).checked) {
+    $('input[type="checkbox"]').change(function () {
+        if ($(this).val() == "Closed" && !$(this).checked) {
             $(this).val("Open");
-        }else{
+        } else {
             $(this).val("Closed");
         }
     })
@@ -44,31 +44,31 @@
     /**
      * Bind remove event to the remove button
      */
-    $('button.remove').click(function(){
+    $('button.remove').click(function () {
         id = $(this).data("id");
-        $.post("/remove",{id: id}, function(data){
-            switch (data.code){
+        $.post("/remove", {id: id}, function (data) {
+            switch (data.code) {
                 case 200:
-                    html = '<div class="alert alert-success"><b>Status '+ data.code + '</b><br>' + data.message + '</div>';
+                    html = '<div class="alert alert-success"><b>Status ' + data.code + '</b><br>' + data.message + '</div>';
                     target.prepend(html).show("slow");
-                    setTimeout(function(){
+                    setTimeout(function () {
                         target.find(".alert").hide("slow").remove();
                         $("#" + id + ".row").hide("slow").remove();
-                        $("#" + id + ".row hr").hide("slow").remove();
+                        $("#" + id + ".row").next("hr").hide("slow").remove();
                     }, 4000);
                     break;
                 case 500:
-                    html = '<div class="alert alert-warning"><b>Status '+ data.code + '</b><br>' + data.message + '</div>';
+                    html = '<div class="alert alert-warning"><b>Status ' + data.code + '</b><br>' + data.message + '</div>';
                     target.prepend(html).show("slow");
-                    setTimeout(function(){
-                       target.find(".alert").hide("slow").remove();
+                    setTimeout(function () {
+                        target.find(".alert").hide("slow").remove();
                     }, 4000);
                     break;
                 default:
-                    html = '<div class="alert alert-warning"><b>Status '+ data.code + '</b><br>' + data.message + '</div>';
+                    html = '<div class="alert alert-warning"><b>Status ' + data.code + '</b><br>' + data.message + '</div>';
                     target.prepend(html).show("slow");
-                    setTimeout(function(){
-                       target.find(".alert").hide("slow").remove();
+                    setTimeout(function () {
+                        target.find(".alert").hide("slow").remove();
                     }, 4000);
                     break;
             }
@@ -78,13 +78,13 @@
     /**
      * Bind edit event to the remove button
      */
-    $('button.edit').click(function(){
+    $('button.edit').click(function () {
         id = $(this).data("id");
         $(this).html("Save");
-        $(this).removeClass("edit").addClass("save").on("click", function(){
+        $(this).removeClass("edit").addClass("save").on("click", function () {
             $.editTask(id);
         });
-        $(this).parent().parent().find("input, select").each(function(){
+        $(this).parent().parent().find("input, select").each(function () {
             $(this).removeAttr("disabled");
         });
     });
@@ -92,41 +92,40 @@
     /**
      * Edit task method has been implemented right here
      */
-    $.editTask = function(id){
+    $.editTask = function (id) {
         var post_data = {};
-        $("button.save").parent().parent().find("input, select").each(function(e){
+        $("button.save").parent().parent().find("input, select").each(function (e) {
             key = $(this).data("id").replace("-" + id, "");
-            console.log(key);
             post_data[key] = $(this).val();
         });
         post_data["id"] = id;
         post_data["status"] = "Closed" ? $("#status-" + id).val() : "Open";
 
-        $.post("/edit",post_data, function(data){
-            switch (data.code){
+        $.post("/edit", post_data, function (data) {
+            switch (data.code) {
                 case 200:
-                    html = '<div class="alert alert-success"><b>Status '+ data.code + '</b><br>' + data.message + '</div>';
+                    html = '<div class="alert alert-success"><b>Status ' + data.code + '</b><br>' + data.message + '</div>';
                     target.prepend(html).show("slow");
                     $("#button-" + id).removeClass("save").addClass("edit").html("Edit").unbind("click");
-                    $("#button-" + id).parent().parent().find("input, select").each(function(e){
-                        $(this).attr("disabled","disabled");
+                    $("#button-" + id).parent().parent().find("input, select").each(function (e) {
+                        $(this).attr("disabled", "disabled");
                     });
-                    setTimeout(function(){
+                    setTimeout(function () {
                         target.find(".alert").hide("slow").remove();
                     }, 4000);
                     break;
                 case 500:
-                    html = '<div class="alert alert-warning"><b>Status '+ data.code + '</b><br>' + data.message + '</div>';
+                    html = '<div class="alert alert-warning"><b>Status ' + data.code + '</b><br>' + data.message + '</div>';
                     target.prepend(html).show("slow");
-                    setTimeout(function(){
-                       target.find(".alert").hide("slow").remove();
+                    setTimeout(function () {
+                        target.find(".alert").hide("slow").remove();
                     }, 4000);
                     break;
                 default:
-                    html = '<div class="alert alert-warning"><b>Status '+ data.code + '</b><br>' + data.message + '</div>';
+                    html = '<div class="alert alert-warning"><b>Status ' + data.code + '</b><br>' + data.message + '</div>';
                     target.prepend(html).show("slow");
-                    setTimeout(function(){
-                       target.find(".alert").hide("slow").remove();
+                    setTimeout(function () {
+                        target.find(".alert").hide("slow").remove();
                     }, 4000);
                     break;
             }
@@ -136,77 +135,44 @@
     /**
      * Bind add task event to the remove button
      */
-    $('button.add').click(function(){
+    $('button.add').click(function () {
         id = $(this).data("id");
 
         /**
-         * In that case I can use a Javascript templating engine such Mustache,
+         * In that case I can use a Javascript template engine such Mustache,
          * but recently ı do not need more dependency, all I have is enough.
          * @type {string}
          */
-        var html = '<div class="row new">' +
-                          '<div class="col-md-12">' +
-                            '<div class="input-group">' +
-                              '<span class="input-group-addon">' +
-                                  '<input type="checkbox" name="status" value="Open">' +
-                              '</span>' +
-                              '<input type="text"  value="" name="value"  class="form-control">' +
-                            '</div><!-- /input-group -->' +
-                          '<div style="margin-top: 5px;" class="clearfix"></div>' +
-                          '<div class="form-group">' +
-                                '<input type="text" value="" class="form-control datepicker" name="due_date">' +
-                          '</div>' +
-                          '<div class="form-group">' +
-                                '<select class="form-control" name="assignee">' +
-                                            '<option value="Teunis Jaylen">Teunis Jaylen</option>' +
-                                            '<option value="Samuel Engelbert">Samuel Engelbert</option>' +
-                                            '<option value="Edvard Jancsi">Edvard Jancsi</option>' +
-                                            '<option value="Fatih Karatana">Fatih Karatana</option>' +
-                                '</select>' +
-                            '</div>' +
-                          '<div class="pull-right">' +
-                              '<button class="save btn btn-sm btn-info" id="save" type="button">Save</button>' +
-                              '<button class="cancel btn btn-sm btn-danger" type="button">Cancel</button>' +
-                          '</div>' +
-                          '</div><!-- /.col-lg-6 -->' +
-                        '</div>' +
-            '<hr class="clearfix" />';
-        $(this).before(html);
-        $('.datepicker').datepicker();
-        $(".new").find("button#save").bind("click", function(){
-            var post_data = {};
-            $(this).parent().parent().find("input, select").each(function(e){
-                key = $(this).attr("name");
-                console.log(key);
-                post_data[key] = $(this).val();
-            });
-            post_data["status"] = "Closed" ? $("#status-" + id).val() : "Open";
-
-            $.post("/add",post_data, function(data){
-                switch (data.code){
-                    case 200:
-                        html = '<div class="alert alert-success"><b>Status '+ data.code + '</b><br>' + data.message + '</div>';
-                        target.prepend(html).show("slow");
-                        setTimeout(function(){
-                            window.location = "localhost:8000";
-                        }, 4000);
-                        break;
-                    case 500:
-                        html = '<div class="alert alert-warning"><b>Status '+ data.code + '</b><br>' + data.message + '</div>';
-                        target.prepend(html).show("slow");
-                        setTimeout(function(){
-                           target.find(".alert").hide("slow").remove();
-                        }, 4000);
-                        break;
-                    default:
-                        html = '<div class="alert alert-warning"><b>Status '+ data.code + '</b><br>' + data.message + '</div>';
-                        target.prepend(html).show("slow");
-                        setTimeout(function(){
-                           target.find(".alert").hide("slow").remove();
-                        }, 4000);
+        var post_data = {};
+        $(this).parent().parent().find("input, select").each(function (e) {
+            key = $(this).attr("name");
+            post_data[key] = $(this).val();
+        });
+        post_data["status"] = "Closed" ? $("input[name='status']").val() : "Open";
+        $.post("/add", post_data, function (data) {
+            switch (data.code) {
+                case 200:
+                    html = '<div class="alert alert-success"><b>Status ' + data.code + '</b><br>' + data.message + '</div>';
+                    target.prepend(html).show("slow");
+                    setTimeout(function () {
+                        window.location = "/";
+                    }, 2000);
                     break;
-                }
-            });
+                case 500:
+                    html = '<div class="alert alert-warning"><b>Status ' + data.code + '</b><br>' + data.message + '</div>';
+                    target.prepend(html).show("slow");
+                    setTimeout(function () {
+                        target.find(".alert").hide("slow").remove();
+                    }, 4000);
+                    break;
+                default:
+                    html = '<div class="alert alert-warning"><b>Status ' + data.code + '</b><br>' + data.message + '</div>';
+                    target.prepend(html).show("slow");
+                    setTimeout(function () {
+                        target.find(".alert").hide("slow").remove();
+                    }, 4000);
+                    break;
+            }
         });
     });
 })(jQuery)

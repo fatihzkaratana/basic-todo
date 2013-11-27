@@ -47,11 +47,23 @@ def add():
     """
     Insert To-Do into the database
     """
-    controller = Controller()
-    post_data = request.form
-    response = controller.add_task(post_data)
-
-    return flask.jsonify(response)
+    try:
+        controller = Controller()
+        status = request.form["status"] if "status" in request.form else None
+        due_date = request.form["duedate"] if "duedate" in request.form else None
+        value = request.form["value"] if "value" in request.form else None
+        assignee = request.form["assignee"] if "assignee" in request.form else None
+        response = controller.add_task(status=status,
+                                       due_date=due_date,
+                                       value=value,
+                                       assignee=assignee)
+    except BaseException as exception:
+        utilities.log(
+            utilities.logging.CRITICAL, "Error occurred while removing data on remove route. Exception: " +
+            exception.message
+        )
+    finally:
+        return flask.jsonify(response)
 
 
 @app.route('/edit', methods=["POST", "GET"])

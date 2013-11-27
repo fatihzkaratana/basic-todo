@@ -28,6 +28,7 @@ THE SOFTWARE.
 @version 1.0.0
 """
 import json
+import uuid
 from model.Task import Task
 from helper.Resources import Resources, utilities
 import random
